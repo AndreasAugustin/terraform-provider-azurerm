@@ -89,6 +89,8 @@ A `notification` block exports the following:
 
 * `enabled` - Whether the notification is enabled.
 
+* `locale` - (Optional) Language in which the recipient will receive the notification.
+
 * `operator` - The comparison operator for the notification.
 
 * `threshold` - Threshold value associated with the notification.

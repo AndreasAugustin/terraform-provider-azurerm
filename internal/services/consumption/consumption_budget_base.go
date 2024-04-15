@@ -147,6 +147,10 @@ func (br consumptionBudgetBaseResource) arguments(fields map[string]*pluginsdk.S
 						Optional: true,
 						Default:  true,
 					},
+					"locale": {
+						Type:     pluginsdk.TypeString,
+						Optional: true,
+					},
 					"threshold": {
 						Type:         pluginsdk.TypeInt,
 						Required:     true,
@@ -556,6 +560,9 @@ func expandConsumptionBudgetNotifications(input []interface{}) *map[string]budge
 			notification.Enabled = notificationRaw["enabled"].(bool)
 			notification.Operator = budgets.OperatorType(notificationRaw["operator"].(string))
 
+			cultureCode := budgets.CultureCode(notificationRaw["locale"].(string))
+			notification.Locale = &cultureCode
+
 			notification.Threshold = float64(notificationRaw["threshold"].(int))
 
 			thresholdType := budgets.ThresholdType(notificationRaw["threshold_type"].(string))
@@ -592,6 +599,8 @@ func flattenConsumptionBudgetNotifications(input *map[string]budgets.Notificatio
 		block := make(map[string]interface{})
 
 		block["enabled"] = n.Enabled
+
+		block["locale"] = n.Locale
 
 		operator := ""
 		if v := n.Operator; v != "" {

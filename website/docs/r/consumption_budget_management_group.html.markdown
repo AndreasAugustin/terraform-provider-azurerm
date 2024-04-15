@@ -126,6 +126,8 @@ A `notification` block supports the following:
 
 * `enabled` - (Optional) Should the notification be enabled? Defaults to `true`.
 
+* `locale` - (Optional) Language in which the recipient will receive the notification.
+
 ---
 
 A `dimension` block supports the following:
